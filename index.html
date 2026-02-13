@@ -7,8 +7,8 @@
     <link rel="icon" type="image/png" href="holding_hands.png">
 
     
-    <!-- Google Fonts - Cuter, Softer Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Caveat:wght@400;700&family=Fredoka:wght@300;400;500;600;700&family=Comfortaa:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts - Cuter, Softer Fonts with More Cursive Options -->
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Caveat:wght@400;700&family=Fredoka:wght@300;400;500;600;700&family=Comfortaa:wght@300;400;600;700&family=Pacifico&family=Dancing+Script:wght@400;500;600;700&family=Satisfy&family=Cookie&family=Great+Vibes&family=Sacramento&display=swap" rel="stylesheet">
     
     <style>
         .corner-logo {
@@ -17,7 +17,7 @@
     left: 20px;
     width: 70px;
     height: auto;
-    z-index: 200;
+    z-index: 5;
 }
 
         :root {
@@ -31,11 +31,17 @@
             --text-dark: #8b7a8b;
             --text-soft: #b5a5b5;
             
-            /* Cuter Fonts */
+            /* Cute & Cursive Fonts */
             --font-heading: 'Fredoka', cursive;
             --font-handwriting: 'Caveat', cursive;
             --font-body: 'Quicksand', sans-serif;
             --font-cute: 'Comfortaa', cursive;
+            --font-cursive-elegant: 'Dancing Script', cursive;
+            --font-cursive-fancy: 'Great Vibes', cursive;
+            --font-cursive-sweet: 'Satisfy', cursive;
+            --font-cursive-playful: 'Pacifico', cursive;
+            --font-cursive-delicate: 'Sacramento', cursive;
+            --font-cursive-simple: 'Cookie', cursive;
         }
         
         * {
@@ -276,7 +282,7 @@
         }
         
         .hero-title {
-            font-family: var(--font-heading);
+            font-family: var(--font-cursive-elegant);
             font-size: clamp(3rem, 10vw, 6rem);
             color: var(--soft-red);
             margin-bottom: 20px;
@@ -286,7 +292,7 @@
         }
         
         .hero-subtitle {
-            font-family: var(--font-heading);
+            font-family: var(--font-cursive-playful);
             font-size: clamp(2rem, 6vw, 4rem);
             color: var(--soft-red);
             margin-bottom: 15px;
@@ -355,7 +361,7 @@
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: var(--font-heading);
+            font-family: var(--font-cursive-playful);
             box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             position: relative;
             overflow: hidden;
@@ -411,7 +417,7 @@
         }
         
         .section-title {
-            font-family: var(--font-heading);
+            font-family: var(--font-cursive-sweet);
             font-size: clamp(2.5rem, 6vw, 4rem);
             color: var(--soft-red);
             margin-bottom: 50px;
@@ -509,8 +515,8 @@
         }
         
         .envelope-preview p {
-            font-family: var(--font-cute);
-            font-size: 1.3rem;
+            font-family: var(--font-cursive-simple);
+            font-size: 1.5rem;
             color: var(--soft-red);
             font-weight: 600;
         }
@@ -627,8 +633,8 @@
         .letter-signature {
             margin-top: 35px;
             text-align: center;
-            font-family: var(--font-handwriting);
-            font-size: 1.7rem;
+            font-family: var(--font-cursive-fancy);
+            font-size: 1.9rem;
             color: var(--soft-red);
             text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
@@ -1143,7 +1149,7 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            z-index: 100;
+            z-index: 5;
         }
         
         .music-toggle:hover {
@@ -1181,7 +1187,7 @@
             animation: ending-glow 3.5s ease-in-out infinite;
             margin-bottom: 70px;
             font-weight: 600;
-            font-family: var(--font-heading);
+            font-family: var(--font-cursive-elegant);
         }
         
         @keyframes ending-glow {
@@ -1372,7 +1378,7 @@
         
         /* ===== MOBILE RESPONSIVE (430px and below) ===== */
         @media (max-width: 430px) {
-            /* Stickers - smaller and repositioned */
+            /* Stickers - smaller and repositioned to avoid overlap */
             .sticker {
                 width: 80px;
                 height: 80px;
@@ -1380,19 +1386,24 @@
             
             .sticker-girl {
                 left: 2%;
-                top: 8%;
+                top: 120px;
             }
             
             .sticker-boy {
                 right: 2%;
-                top: 8%;
+                top: 120px;
             }
             
-            /* Corner logo smaller */
+            /* Corner logo smaller and positioned to not overlap */
             .corner-logo {
                 width: 50px;
                 top: 15px;
                 left: 15px;
+            }
+            
+            /* NO button - ensure it stays on screen in mobile */
+            .btn-no {
+                max-width: calc(100vw - 40px);
             }
             
             /* Floating assistant smaller */
@@ -1461,7 +1472,7 @@
             }
             
             .letter-signature {
-                font-size: 1.5rem;
+                font-size: 1.6rem;
                 margin-top: 25px;
             }
             
@@ -1979,8 +1990,18 @@ Alhamdulillahhh, I guess I can technically say I am your fiancée now....ahhhhhh
             const yes = document.getElementById('btnYes');
             const no = document.getElementById('btnNo');
             const rect = yes.getBoundingClientRect();
-            no.style.left = (rect.right + 40) + 'px';
-            no.style.top = rect.top + 'px';
+            
+            // Mobile: position below YES button
+            if (window.innerWidth <= 430) {
+                no.style.left = '50%';
+                no.style.transform = 'translateX(-50%)';
+                no.style.top = (rect.bottom + 20) + 'px';
+            } else {
+                // Desktop: position to the right of YES button
+                no.style.left = (rect.right + 40) + 'px';
+                no.style.top = rect.top + 'px';
+                no.style.transform = 'none';
+            }
         }
         
         function handleYes() {
@@ -2020,7 +2041,6 @@ Alhamdulillahhh, I guess I can technically say I am your fiancée now....ahhhhhh
             const yesScale = 1 + (noAttempts * 0.2);
             const noScale = Math.max(0.3, 1 - (noAttempts * 0.2));
             yes.style.transform = `scale(${yesScale})`;
-            no.style.transform = `scale(${noScale})`;
             
             // Move NO away
             const rect = no.getBoundingClientRect();
@@ -2044,11 +2064,14 @@ Alhamdulillahhh, I guess I can technically say I am your fiancée now....ahhhhhh
             let newX = rect.left + deltaX * 2;
             let newY = rect.top + deltaY * 2;
             
-            newX = Math.max(30, Math.min(vw - rect.width - 30, newX));
-            newY = Math.max(100, Math.min(vh - rect.height - 200, newY));
+            // Better mobile boundaries
+            const margin = window.innerWidth <= 430 ? 20 : 30;
+            newX = Math.max(margin, Math.min(vw - rect.width - margin, newX));
+            newY = Math.max(150, Math.min(vh - rect.height - 150, newY));
             
             no.style.left = newX + 'px';
             no.style.top = newY + 'px';
+            no.style.transform = `scale(${noScale})`;
             
             // Reactions
             if (noAttempts === 1) {
